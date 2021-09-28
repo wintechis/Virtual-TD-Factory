@@ -1,0 +1,512 @@
+{
+	"info": {
+		"_postman_id": "a547164c-f130-4be9-b85b-17cfa2c63ad3",
+		"name": "Webgl_Websocket",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Websocket_message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\":\"manuel\",\r\n    \"Object\": \"yellow\",\r\n    \"Joint\":{\r\n        \"Joint1\":\"224\",\r\n        \"Joint2\":\"15\",\r\n        \"Joint3\":\"124\",\r\n        \"Joint4\":\"-55\",\r\n        \"Joint5\":\"-23\",\r\n        \"Joint6\":\"-23\"\r\n    },\r\n    \"Speed\":\"3000\",\r\n    \"Step\":\"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/Websockettest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Websockettest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PickGreen",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Pick_Green",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Pick_Green"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PickYellow",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Pick_Yellow",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Pick_Yellow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PickBlue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Pick_Blue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Pick_Blue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PickRed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Pick_Red",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Pick_Red"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J1+",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J1plus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J1plus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J1-",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J1minus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J1minus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J2+",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J2plus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J2plus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J2-",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J2minus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J2minus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J3+",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J3plus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J3plus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J3-",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J3minus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J3minus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J4-",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J4minus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J4minus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J4+",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J4plus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J4plus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J5+",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J5plus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J5plus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J5-",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J5minus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J5minus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J6-",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J6minus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J6minus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "J6+",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/J6plus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"J6plus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Speedplus500",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Speedplus500",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Speedplus500"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Speedminus500",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Speedminus500",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Speedminus500"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Speedplus200",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Speedplus200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Speedplus200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Speedminus200",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Speedminus200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Speedminus200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stepplus5",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Stepplus5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Stepplus5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stepplus2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Stepplus2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Stepplus2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stepminus5",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Stepminus5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Stepminus5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stepminus2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Stepminus2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Stepminus2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "grabObject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/grabObject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"grabObject"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

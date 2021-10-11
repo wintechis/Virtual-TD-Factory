@@ -109,7 +109,12 @@ io.on('connection', function (socket) {
 
 
 
+app.post('/Actions/test', (req, res) => {
 
+    console.log(req.body);
+    wsc.send(JSON.stringify(req.body));
+    res.status(200).send();
+})
 
 
 

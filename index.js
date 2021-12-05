@@ -565,3 +565,67 @@ app.post('/grabObject', (req, res) => {
         res.status(200).send();
     }
 })
+
+
+
+app.post('/ozobot/followline', (req, res) => {
+    wsc.send(JSON.stringify({
+        "Ozobot": "followline"
+    }));
+    res.status(200).send();
+})
+
+app.post('/ozobot/forward', (req, res) => {
+    wsc.send(JSON.stringify({
+        "Ozobot": "front"
+    }));
+    res.status(200).send();
+})
+
+app.post('/ozobot/back', (req, res) => {
+    wsc.send(JSON.stringify({
+        "Ozobot": "back"
+    }));
+    res.status(200).send();
+})
+
+app.post('/ozobot/left', (req, res) => {
+    wsc.send(JSON.stringify({
+        "Ozobot": "left"
+    }));
+    res.status(200).send();
+})
+
+app.post('/ozobot/right', (req, res) => {
+    wsc.send(JSON.stringify({
+        "Ozobot": "right"
+    }));
+    res.status(200).send();
+})
+
+app.post('/ozobot/stop', (req, res) => {
+    wsc.send(JSON.stringify({
+        "Ozobot": "stop"
+    }));
+    res.status(200).send();
+})
+
+
+
+app.post('/mirobot1/Pick_Box', (req, res) => {
+
+    if (isrobotRuning == true) {
+        res.status(418).send();
+    } else {
+
+        //wsc.send(JSON.stringify({
+        //    "Action": "auto",
+        //    "Object": "green"
+        //}));
+
+        wsc.send(JSON.stringify(req.body));
+
+        res.status(200).send();
+    //    console.log(req.body);
+    }
+})

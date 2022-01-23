@@ -1,0 +1,643 @@
+{
+	"info": {
+		"_postman_id": "a547164c-f130-4be9-b85b-17cfa2c63ad3",
+		"name": "Scenario_Nr3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Websocket_message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\":\"manuel\",\r\n    \"Object\": \"yellow\",\r\n    \"Joint\":{\r\n        \"Joint1\":\"224\",\r\n        \"Joint2\":\"15\",\r\n        \"Joint3\":\"124\",\r\n        \"Joint4\":\"-55\",\r\n        \"Joint5\":\"-23\",\r\n        \"Joint6\":\"-23\"\r\n    },\r\n    \"Speed\":\"3000\",\r\n    \"Step\":\"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/Websockettest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Websockettest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3/ozobot/stop",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3/ozobot/stop",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"ozobot",
+						"stop"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3/ozobot/followline",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3/ozobot/followline",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"ozobot",
+						"followline"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3/ozobot/left",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3/ozobot/left",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"ozobot",
+						"left"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3/ozobot/right",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3/ozobot/right",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"ozobot",
+						"right"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3/ozobot/forward",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3/ozobot/forward",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"ozobot",
+						"forward"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3/ozobot/back",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3/ozobot/back",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"ozobot",
+						"back"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3/Mirobot1/PickBox",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Mirobot\": \r\n        {\r\n            \"Number\": \"1\",\r\n            \"Action\" : \"green\"\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/Scenario3/mirobot1/Pick_Box",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"mirobot1",
+						"Pick_Box"
+					],
+					"query": [
+						{
+							"key": "Action",
+							"value": "auto",
+							"disabled": true
+						},
+						{
+							"key": "Object",
+							"value": "green",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3/Mirobot2/PickBox",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Mirobot\": \r\n        {\r\n            \"Number\": \"2\",\r\n            \"Action\" : \"red\"\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/Scenario3/mirobot2/Pick_Box",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"mirobot2",
+						"Pick_Box"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3/Mirobot3/PickBox",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Mirobot\": \r\n        {\r\n            \"Number\": \"3\",\r\n            \"Action\" : \"blue\"\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/Scenario3/mirobot3/Pick_Box",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"mirobot3",
+						"Pick_Box"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3/mirobot1/status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3000/Scenario3/mirobot1/status",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3",
+						"mirobot1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp1/signal_lights/status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp1/signal_lights/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp1",
+						"signal_lights",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp1/signal_lights/green",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp1/signal_lights/green",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp1",
+						"signal_lights",
+						"green"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp1/signal_lights/yellow",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp1/signal_lights/yellow",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp1",
+						"signal_lights",
+						"yellow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp1/signal_lights/red",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp1/signal_lights/red",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp1",
+						"signal_lights",
+						"red"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp2/signal_lights/status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp2/signal_lights/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp2",
+						"signal_lights",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp2/signal_lights/green",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp2/signal_lights/green",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp2",
+						"signal_lights",
+						"green"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp2/signal_lights/yellow",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp2/signal_lights/yellow",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp2",
+						"signal_lights",
+						"yellow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp2/signal_lights/red",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp2/signal_lights/red",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp2",
+						"signal_lights",
+						"red"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp3/signal_lights/status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp3/signal_lights/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp3",
+						"signal_lights",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp3/signal_lights/green",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp3/signal_lights/green",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp3",
+						"signal_lights",
+						"green"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp3/signal_lights/yellow",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp3/signal_lights/yellow",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp3",
+						"signal_lights",
+						"yellow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario3_grp3/signal_lights/red",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp3/signal_lights/red",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp3",
+						"signal_lights",
+						"red"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3_grp3/ozobot_1/LED0",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp3/ozobot_1/LED0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp3",
+						"ozobot_1",
+						"LED0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3_grp3/ozobot_1/LED1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp3/ozobot_1/LED1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp3",
+						"ozobot_1",
+						"LED1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3_grp3/ozobot_1/LED2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp3/ozobot_1/LED2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp3",
+						"ozobot_1",
+						"LED2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3_grp3/ozobot_1/LED3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp3/ozobot_1/LED3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp3",
+						"ozobot_1",
+						"LED3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Scenario3_grp3/ozobot_1/LED4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Scenario3_grp3/ozobot_1/LED4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Scenario3_grp3",
+						"ozobot_1",
+						"LED4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

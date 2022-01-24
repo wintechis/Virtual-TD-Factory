@@ -15,8 +15,10 @@
     "express-ws": "^5.0.2",
     "fs": "^0.0.1-security",
     "jquery-resizable-dom": "^0.35.0",
+    "kill-port": "^1.6.1",
     "mongoose": "^6.0.7",
     "socket.io": "^2.0.1",
+    "uuid": "^8.3.2",
     "ws": "^8.2.2"
   }
 }

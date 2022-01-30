@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "4ce7b1c3-9d9e-4c95-a374-ecc455ca365e",
+		"name": "One-For-All",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get_All_status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\":\"manuel\",\r\n    \"Object\": \"yellow\",\r\n    \"Joint\":{\r\n        \"Joint1\":\"224\",\r\n        \"Joint2\":\"15\",\r\n        \"Joint3\":\"124\",\r\n        \"Joint4\":\"-55\",\r\n        \"Joint5\":\"-23\",\r\n        \"Joint6\":\"-23\"\r\n    },\r\n    \"Speed\":\"3000\",\r\n    \"Step\":\"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/get_All_status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"get_All_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "move_Them_ALL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\":\"manuel\",\r\n    \"Object\": \"yellow\",\r\n    \"Joint\":{\r\n        \"Joint1\":\"224\",\r\n        \"Joint2\":\"15\",\r\n        \"Joint3\":\"124\",\r\n        \"Joint4\":\"-55\",\r\n        \"Joint5\":\"-23\",\r\n        \"Joint6\":\"-23\"\r\n    },\r\n    \"Speed\":\"3000\",\r\n    \"Step\":\"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/move_Them_ALL",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"move_Them_ALL"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

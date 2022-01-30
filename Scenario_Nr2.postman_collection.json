@@ -6,181 +6,341 @@
 	},
 	"item": [
 		{
-			"name": "/Scenario2/Mirobot/PickBox",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Mirobot\": \r\n        {\r\n            \"Number\": \"sc2\",\r\n            \"Action\" : \"green\"\r\n        }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Mirobot",
+			"item": [
+				{
+					"name": "/Scenario2/Mirobot/PickBox",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Mirobot\": \r\n        {\r\n            \"Number\": \"sc2\",\r\n            \"Action\" : \"blue\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/mirobot/Pick_Box",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"mirobot",
+								"Pick_Box"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:3000/Scenario2/mirobot/Pick_Box",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"Scenario2",
-						"mirobot",
-						"Pick_Box"
-					]
+				{
+					"name": "Scenario2/mirobot/status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/mirobot/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"mirobot",
+								"status"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Scenario2/mirobot/status",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:3000/Scenario2/mirobot/status",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"Scenario2",
-						"mirobot",
-						"status"
-					]
+			"name": "Signallight",
+			"item": [
+				{
+					"name": "/Scenario2/signal_lights/interval",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Signallight\": \r\n        {\r\n            \"id\": \"2\",\r\n            \"Interval\" : 1\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/interval",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"interval"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/red",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Signallight\": \r\n        {\r\n            \"id\": \"2\",\r\n            \"red\": {\r\n                \"value\": 255,\r\n                \"blink\": \"false\"\r\n            }\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/red",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"red"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/green",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Signallight\": \r\n        {\r\n            \"id\": \"2\",\r\n            \"green\": {\r\n                \"value\": 255,\r\n                \"blink\": \"true\"\r\n            }\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/red",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"red"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/off",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Signallight\": \r\n        {\r\n            \"id\": \"2\",\r\n            \"status\": \"off\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/off",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"off"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/on",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Signallight\": \r\n        {\r\n            \"id\": \"2\",\r\n            \"status\": \"on\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/on",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"on"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/on",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/on",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"on"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/red",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/red",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"red"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/yellow",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/yellow",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"yellow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/green",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/green",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"green"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario2/signal_lights/interval",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Scenario2/signal_lights/interval",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Scenario2",
+								"signal_lights",
+								"interval"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Scenario2/signal_lights/on",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/Scenario2/signal_lights/on",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"Scenario2",
-						"signal_lights",
-						"on"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Scenario2/signal_lights/red",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/Scenario2/signal_lights/red",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"Scenario2",
-						"signal_lights",
-						"red"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Scenario2/signal_lights/yellow",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/Scenario2/signal_lights/yellow",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"Scenario2",
-						"signal_lights",
-						"yellow"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Scenario2/signal_lights/green",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/Scenario2/signal_lights/green",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"Scenario2",
-						"signal_lights",
-						"green"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Scenario2/signal_lights/status",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/Scenario2/signal_lights/status",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"Scenario2",
-						"signal_lights",
-						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Scenario2/signal_lights/interval",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/Scenario2/signal_lights/interval",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"Scenario2",
-						"signal_lights",
-						"interval"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }

@@ -16,92 +16,19 @@ const wsunity = require("ws");
 const wsclient = require("ws");
 const bodyPraser = require("body-parser");
 //const { stat } = require('fs');
-var isSc1robotRuning;
-var isSc2robotRuning;
-var isSc3robot1Runing;
-var isSc3robot2Runing;
-var isSc3robot3Runing;
-var isSpeedMax;
-var isSpeedMin;
-var isStepMin;
-var isSc2OzobotinArea;
+
 app.use(cors());
 app.use(bodyPraser.json());
 app.use(bodyPraser.urlencoded({ extended: true }));
 app.use(express.static('Webgl'));
+
+var AllStatus;
 
 
 
 /////// ------- serving html/webgl -------/////
 server.listen(3000, function () {
     console.log('listening on *:3000');
-});
-
-
-//////-------Websocket Server for Update checking Setup------------//// 
-
-const wss_update = new wsunity.Server({ port: 8081 }, () => {
-    console.log('websocket server for status update checking online');
-});
-
-wss_update.on('connection', function connection(ws) {
-    ws.on('message', function status_update(data) {
-        //console.log("recevied data: " + data)
-        if (data == "busy") {
-            isrobotRuning = true;
-        } else if (data == "nobusy") {
-            isrobotRuning = false;
-        } else if (data == "minSpeed") {
-            isSpeedMin = true;
-            console.log('isSpeedMin: ' + isSpeedMin);
-        } else if (data == "maxSpeed") {
-            isSpeedMax = true;
-            console.log('isSpeedMax: ' + isSpeedMax);
-        } else if (data == "Speedokay") {
-            isSpeedMin = false;
-            isSpeedMax = false;
-            console.log('Speedokay');
-        } else if (data == "minStep") {
-            isStepMin = true;
-            console.log('isStepMin: ' + isStepMin);
-        } else if (data == "Stepokay") {
-            isStepMin = false;
-            console.log('isStepMin: ' + isStepMin);
-        } else if (JSON.parse(data).colliderEnter == "Ozobot_sc2") {
-            console.log("ozobotSc2_enter");
-            isSc2OzobotinArea = true;
-        } else if (JSON.parse(data).colliderExit == "Ozobot_sc2") {
-            console.log("ozobotSc2_exit");
-            isSc2OzobotinArea = false;
-        } else if (JSON.parse(data).isNotMoving == "FK_Sc1") {
-            //console.log("FK_Sc1 Stopping");
-            isSc1robotRuning = false;
-        } else if (JSON.parse(data).isMoving == "FK_Sc1") {
-            //console.log("FK_Sc1 Running");
-            isSc1robotRuning = true;
-        } else if (JSON.parse(data).isNotMoving == "FK_Sc2") {
-            isSc2robotRuning = false;
-        } else if (JSON.parse(data).isMoving == "FK_Sc2") {
-            isSc2robotRuning = true;
-        } else if (JSON.parse(data).isNotMoving == "FK_grp1") {
-            isSc3robot1Runing = false;
-        } else if (JSON.parse(data).isMoving == "FK_grp1") {
-            isSc3robot1Runing = true;
-        } else if (JSON.parse(data).isNotMoving == "FK_grp2") {
-            isSc3robot2Runing = false;
-        } else if (JSON.parse(data).isMoving == "FK_grp2") {
-            isSc3robot2Runing = true;
-        } else if (JSON.parse(data).isNotMoving == "FK_grp3") {
-            isSc3robot3Runing = false;
-        } else if (JSON.parse(data).isMoving == "FK_grp3") {
-            isSc3robot3Runing = true;
-        }
-    });
-
-    //ws.on('close', function close() {
-    //    ws.removeListener('message', status_update);
-    //});
-
 });
 
 
@@ -112,623 +39,25 @@ const wss = new wsunity.Server({ port: 8080 }, () => {
     console.log('websocket server online');
 });
 
+wss.on('close', function close() {
+});
+
 wss.on('connection', function connection(ws) {
-    isrobotRuning = false;
-    isSpeedMax = false;
-    isSpeedMin = false;
-    isStepMin = false;
-    isSc2OzobotinArea = false;
+    ws.on('message', function status_update(data) {
+        //console.log("recevied data: " + data)
+        AllStatus = data
+        //console.log('Mirobot id:' + JSON.parse(AllStatus).Mirobot[0].id);
+        //console.log('ozobo led:' + JSON.parse(AllStatus).Ozobot[0].LED0);
+        //console.log('ozobo led:' + JSON.parse(AllStatus).Ozobot[0].LED0[0]);
+        //console.log('ozobo led:' + JSON.parse(AllStatus).Signallight[0].yellow);
 
-    //////////-----------------sc1 sl----------------///////////////
-    app.get('/Scenario1/signal_lights/yellow', (req, res) => {
-        ws.on('message', function S1SLyellow(data) {
-            console.log('received: %s', data);
-            if (JSON.parse(data).request_id == "s1slcol") {
-                console.log('read color:' + JSON.parse(data).yellow);
-                res.status(200).send(JSON.parse(data).yellow);
-            } else {
-                res.status(418).send();
-            }
-            ws.removeListener('message', S1SLyellow)
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "1",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario1/signal_lights/red', (req, res) => {
-        ws.on('message', function S1SLred(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s1slcol") {
-                console.log('read color:' + JSON.parse(data).red);
-                res.status(200).send(JSON.parse(data).red);
-                ws.removeListener('message', S1SLred)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "1",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario1/signal_lights/green', (req, res) => {
-        ws.on('message', function S1SLgreen(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s1slcol") {
-                console.log('read color:' + JSON.parse(data).green);
-                res.status(200).send(JSON.parse(data).green);
-                ws.removeListener('message', S1SLgreen)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "1",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario1/signal_lights/status', (req, res) => {
-        ws.on('message', function S1SLcolor(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s1slcol") {
-                //console.log('read color:' + JSON.parse(data).color);
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S1SLcolor)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "1",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-
-    //////////////------------------------s2 sl------------------//////////////
-    app.get('/Scenario2/signal_lights/yellow', (req, res) => {
-        ws.on('message', function S2SLyellow(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s2slcol") {
-                console.log('read color:' + JSON.parse(data).yellow);
-                res.status(200).send(JSON.parse(data).yellow);
-                ws.removeListener('message', S2SLyellow)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "2",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario2/signal_lights/red', (req, res) => {
-        ws.on('message', function S2SLred(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s2slcol") {
-                console.log('read color:' + JSON.parse(data).red);
-                res.status(200).send(JSON.parse(data).red);
-                ws.removeListener('message', S2SLred)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "2",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario2/signal_lights/green', (req, res) => {
-        ws.on('message', function S2SLgreen(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s2slcol") {
-                console.log('read color:' + JSON.parse(data).green);
-                res.status(200).send(JSON.parse(data).green);
-                ws.removeListener('message', S2SLgreen)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "2",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario2/signal_lights/status', (req, res) => {
-        ws.on('message', function S2SLcolor(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s2slcol") {
-                //console.log('read color:' + JSON.parse(data).color);
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S2SLcolor)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "2",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-
-    ///////////////----------------sc3-1 sl----------------////////////////////////
-    app.get('/Scenario3_grp1/signal_lights/yellow', (req, res) => {
-        ws.on('message', function S3grp1SLyellow(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_1slcol") {
-                console.log('read color:' + JSON.parse(data).yellow);
-                res.status(200).send(JSON.parse(data).yellow);
-                ws.removeListener('message', S3grp1SLyellow)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "3",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp1/signal_lights/red', (req, res) => {
-        ws.on('message', function S3grp1SLred(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_1slcol") {
-                console.log('read color:' + JSON.parse(data).red);
-                res.status(200).send(JSON.parse(data).red);
-                ws.removeListener('message', S3grp1SLred)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "3",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp1/signal_lights/green', (req, res) => {
-        ws.on('message', function S3grp1SLgreen(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_1slcol") {
-                console.log('read color:' + JSON.parse(data).green);
-                res.status(200).send(JSON.parse(data).green);
-                ws.removeListener('message', S3grp1SLgreen)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "3",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp1/signal_lights/status', (req, res) => {
-        ws.on('message', function S3grp1SLcolor(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_1slcol") {
-                //console.log('read color:' + JSON.parse(data).color);
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S3grp1SLcolor)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "3",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-
-
-    ///////////////----------------sc3-2 sl----------------////////////////////////
-    app.get('/Scenario3_grp2/signal_lights/yellow', (req, res) => {
-        ws.on('message', function S3grp2SLyellow(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_2slcol") {
-                console.log('read color:' + JSON.parse(data).yellow);
-                res.status(200).send(JSON.parse(data).yellow);
-                ws.removeListener('message', S3grp2SLyellow)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "4",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp2/signal_lights/red', (req, res) => {
-        ws.on('message', function S3grp2SLred(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_2slcol") {
-                console.log('read color:' + JSON.parse(data).red);
-                res.status(200).send(JSON.parse(data).red);
-                ws.removeListener('message', S3grp2SLred)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "4",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp2/signal_lights/green', (req, res) => {
-        ws.on('message', function S3grp2SLgreen(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_2slcol") {
-                console.log('read color:' + JSON.parse(data).green);
-                res.status(200).send(JSON.parse(data).green);
-                ws.removeListener('message', S3grp2SLgreen)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "4",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp2/signal_lights/status', (req, res) => {
-        ws.on('message', function S3grp1SLcolor(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_2slcol") {
-                //console.log('read color:' + JSON.parse(data).color);
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S3grp1SLcolor)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "4",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    ///////////////----------------sc3-2 sl----------------////////////////////////
-    app.get('/Scenario3_grp3/signal_lights/yellow', (req, res) => {
-        ws.on('message', function S3grp3SLyellow(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_3slcol") {
-                console.log('read color:' + JSON.parse(data).yellow);
-                res.status(200).send(JSON.parse(data).yellow);
-                ws.removeListener('message', S3grp3SLyellow)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "5",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp3/signal_lights/red', (req, res) => {
-        ws.on('message', function S3grp3SLred(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_3slcol") {
-                console.log('read color:' + JSON.parse(data).red);
-                res.status(200).send(JSON.parse(data).red);
-                ws.removeListener('message', S3grp3SLred)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "5",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp3/signal_lights/green', (req, res) => {
-        ws.on('message', function S3grp3SLgreen(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_3slcol") {
-                console.log('read color:' + JSON.parse(data).green);
-                res.status(200).send(JSON.parse(data).green);
-                ws.removeListener('message', S3grp3SLgreen)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "5",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp3/signal_lights/status', (req, res) => {
-        ws.on('message', function S3grp3SLcolor(data) {
-            console.log('received: %s', data);
-            if (data.request_id = "s3_3slcol") {
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S3grp3SLcolor)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Signallight":
-                    {
-                        "id": "5",
-                        "getcolor": "color"
-                    }
-                }));
-            }
-        });
-    })
-
-
-    app.get('/Scenario3_grp3/ozobot_1/LED0', (req, res) => {
-        ws.on('message', function S3grpOzobo1LED0(data) {
-            console.log('received: %s', data);
-            if (JSON.parse(data).request_id = "oz_led0col") {
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S3grpOzobo1LED0)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Ozobot": "LED0"
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp3/ozobot_1/LED1', (req, res) => {
-        ws.on('message', function S3grpOzobo1LED1(data) {
-            console.log('received: %s', data);
-            if (JSON.parse(data).request_id = "oz_led1col") {
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S3grpOzobo1LED1)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Ozobot": "LED1"
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp3/ozobot_1/LED2', (req, res) => {
-        ws.on('message', function S3grpOzobo1LED2(data) {
-            console.log('received: %s', data);
-            if (JSON.parse(data).request_id = "oz_led2col") {
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S3grpOzobo1LED2)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Ozobot": "LED2"
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp3/ozobot_1/LED3', (req, res) => {
-        ws.on('message', function S3grpOzobo1LED3(data) {
-            console.log('received: %s', data);
-            if (JSON.parse(data).request_id = "oz_led3col") {
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S3grpOzobo1LED3)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Ozobot": "LED3"
-                }));
-            }
-        });
-    })
-
-    app.get('/Scenario3_grp3/ozobot_1/LED4', (req, res) => {
-        ws.on('message', function S3grpOzobo1LED4(data) {
-            console.log('received: %s', data);
-            if (JSON.parse(data).request_id = "oz_led4col") {
-                res.status(200).send(JSON.parse(data));
-                ws.removeListener('message', S3grpOzobo1LED4)
-            }
-        });
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify({
-                    "Ozobot": "LED4"
-                }));
-            }
-        });
-    })
-
-    /////------------------------event status update-------------------------//////////////
-    //ws.on('message', function status_update(data) {
-    //    console.log("recevied data: " + data)
-    //    if (data == "busy") {
-    //        isrobotRuning = true;
-    //        //console.log('isrobotRuning: ' + isrobotRuning);
-    //    } else if (data == "nobusy") {
-    //        isrobotRuning = false;
-    //        //    console.log('isrobotRuning: ' + isrobotRuning);
-    //    } else if (data == "minSpeed") {
-    //        isSpeedMin = true;
-    //        console.log('isSpeedMin: ' + isSpeedMin);
-    //    } else if (data == "maxSpeed") {
-    //        isSpeedMax = true;
-    //        console.log('isSpeedMax: ' + isSpeedMax);
-    //    } else if (data == "Speedokay") {
-    //        isSpeedMin = false;
-    //        isSpeedMax = false;
-    //        console.log('Speedokay');
-    //    } else if (data == "minStep") {
-    //        isStepMin = true;
-    //        console.log('isStepMin: ' + isStepMin);
-    //    } else if (data == "Stepokay") {
-    //        isStepMin = false;
-    //        console.log('isStepMin: ' + isStepMin);
-    //    } else if (data.colliderEnter == "Ozobot_sc2") {
-    //        console.log("ozobotSc2_enter");
-    //        isSc2OzobotinArea = true;
-    //    } else if (data.colliderExit == "Ozobot_sc2") {
-    //        console.log("ozobotSc2_exit");
-    //        isSc2OzobotinArea = false;
-
-    //    }
-    //});
-
-    //ws.on('close', function close() {
-    //    ws.removeListener('message', status_update);
-    //});
-
+    });
 });
 
 wss.on('listening', () => {
     console.log("listening");
 });
 
-
-
-////////////////-------------------------------------websocket client---------------------/////////////////////////////////
-
-//const wsc = new wsclient('ws://localhost:8080/');  
-//wsc.on('open', function open() {
-//    //wsc.send('trigger socket oppened');
-//    incomingData = null;
-//});
-//wsc.on('message', function incoming(message) {
-//    console.log('websocket client trigger received: %s', message);
-//});
-
-
-
-
-
-
-
-////////// ------------------Socket.io--------------------//////////////
-
-io.on('connection', function (socket) {
-    console.log('a user connected, user id: ' + socket.userId);
-    socket.on('status', (status) => {
-        isrobotRuning = status;
-        console.log(status);
-    });
-
-});
 
 
 
@@ -742,28 +71,12 @@ app.post('/Actions/test', (req, res) => {
 })
 
 
-//app.post('/Websockettest', (req, res) => {
-//    //wsc.send(JSON.stringify(req.body));
-//    //io.emit("chat", "hi from nodejs");
-//    wss.send("test");
-//    res.status(200).send();
-//})
-
-
+/////////////-------------------SC1-----------------------///////////////
 app.post('/Scenario1/Mirobot/Pick_Green', (req, res) => {
 
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "auto",
-        //    Object: "green"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "auto",
-        //    "Object": "green",
-        //}));
-
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -772,27 +85,15 @@ app.post('/Scenario1/Mirobot/Pick_Green', (req, res) => {
                 }));
             }
         });
-
-
-
         res.status(200).send();
     }
 })
 
 app.post('/Scenario1/Mirobot/Pick_Yellow', (req, res) => {
 
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "auto",
-        //    Object: "yellow"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "auto",
-        //    "Object": "yellow",
-        //}));
-
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -801,23 +102,14 @@ app.post('/Scenario1/Mirobot/Pick_Yellow', (req, res) => {
                 }));
             }
         });
-
         res.status(200).send();
     }
 })
 
 app.post('/Scenario1/Mirobot/Pick_Red', (req, res) => {
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "auto",
-        //    Object: "red"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "auto",
-        //    "Object": "red",
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -832,17 +124,9 @@ app.post('/Scenario1/Mirobot/Pick_Red', (req, res) => {
 
 app.post('/Scenario1/Mirobot/Pick_Blue', (req, res) => {
 
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "auto",
-        //    Object: "blue"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "auto",
-        //    "Object": "blue",
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -856,21 +140,9 @@ app.post('/Scenario1/Mirobot/Pick_Blue', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J1plus', (req, res) => {
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //Action: "manuel",
-        //Joint: {
-        //    Joint1: "+",
-        //}
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint1": "+",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -887,21 +159,9 @@ app.post('/Scenario1/Mirobot/J1plus', (req, res) => {
 
 app.post('/Scenario1/Mirobot/J1minus', (req, res) => {
 
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint1: "-",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint1": "-",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -912,27 +172,14 @@ app.post('/Scenario1/Mirobot/J1minus', (req, res) => {
                 }));
             }
         });
-
         res.status(200).send();
     }
 })
 
 app.post('/Scenario1/Mirobot/J2plus', (req, res) => {
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint2: "+",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint2": "+",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -948,22 +195,9 @@ app.post('/Scenario1/Mirobot/J2plus', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J2minus', (req, res) => {
-
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint2: "-",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint2": "-",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -979,21 +213,9 @@ app.post('/Scenario1/Mirobot/J2minus', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J3plus', (req, res) => {
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint3: "+",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint3": "+",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1009,21 +231,9 @@ app.post('/Scenario1/Mirobot/J3plus', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J3minus', (req, res) => {
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint3: "-",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint3": "-",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1039,22 +249,9 @@ app.post('/Scenario1/Mirobot/J3minus', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J4plus', (req, res) => {
-
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint4: "+",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint4": "+",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1070,21 +267,9 @@ app.post('/Scenario1/Mirobot/J4plus', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J4minus', (req, res) => {
-    if (isSc1robotRuning == true) {
-        res.status(418).send();
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
+        res.status(418).send("Mirobot is moving");
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint4: "-",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint4": "-",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1100,21 +285,9 @@ app.post('/Scenario1/Mirobot/J4minus', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J5plus', (req, res) => {
-    if (isSc1robotRuning == true) {
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint5: "+",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint5": "+",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1130,21 +303,9 @@ app.post('/Scenario1/Mirobot/J5plus', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J5minus', (req, res) => {
-    if (isSc1robotRuning == true) {
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint5: "-",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint5": "-",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1160,21 +321,9 @@ app.post('/Scenario1/Mirobot/J5minus', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J6plus', (req, res) => {
-    if (isSc1robotRuning == true) {
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint6: "+",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint6": "+",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1190,21 +339,9 @@ app.post('/Scenario1/Mirobot/J6plus', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/J6minus', (req, res) => {
-    if (isSc1robotRuning == true) {
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Action: "manuel",
-        //    Joint: {
-        //        Joint6: "-",
-        //    }
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "manuel",
-        //    "Joint": {
-        //        "Joint6": "-",
-        //    }
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1223,12 +360,6 @@ app.post('/Scenario1/Mirobot/Speedplus500', (req, res) => {
     if (isSpeedMax == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Speed: "+500"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Speed": "+500"
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1244,12 +375,6 @@ app.post('/Scenario1/Mirobot/Speedminus500', (req, res) => {
     if (isSpeedMin == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Speed: "-500"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Speed": "-500"
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1265,13 +390,6 @@ app.post('/Scenario1/Mirobot/Speedplus200', (req, res) => {
     if (isSpeedMax == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Speed: "+200"
-
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Speed": "+200"
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1287,13 +405,6 @@ app.post('/Scenario1/Mirobot/Speedminus200', (req, res) => {
     if (isSpeedMin == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Speed: "-200"
-
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Speed": "-200"
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1309,12 +420,6 @@ app.post('/Scenario1/Mirobot/Stepplus5', (req, res) => {
     if (isrobotRuning == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Step: "+5"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Step": "+5"
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1330,12 +435,6 @@ app.post('/Scenario1/Mirobot/Stepminus5', (req, res) => {
     if (isStepMin == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Step: "-5"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Step": "-5"
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1351,12 +450,6 @@ app.post('/Scenario1/Mirobot/Stepplus2', (req, res) => {
     if (isrobotRuning == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Step: "+2"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Step": "+2"
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1372,12 +465,6 @@ app.post('/Scenario1/Mirobot/Stepminus2', (req, res) => {
     if (isStepMin == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Step: "-2"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Step": "-2"
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1390,15 +477,9 @@ app.post('/Scenario1/Mirobot/Stepminus2', (req, res) => {
 })
 
 app.post('/Scenario1/Mirobot/grabObject', (req, res) => {
-    if (isSc1robotRuning == true) {
+    if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
         res.status(418).send();
     } else {
-        //io.emit('receive', {
-        //    Action: "grab"
-        //});
-        //wsc.send(JSON.stringify({
-        //    "Action": "grab"
-        //}));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify({
@@ -1411,11 +492,122 @@ app.post('/Scenario1/Mirobot/grabObject', (req, res) => {
 })
 
 
+app.post('/Scenario1/signal_lights/interval', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario1/signal_lights/on', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario1/signal_lights/off', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario1/signal_lights/red', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario1/signal_lights/green', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+
+
+
+
+
+////////////////-------------------SC 2 ------------------------////////////////////
+app.post('/Scenario2/mirobot/Pick_Box', (req, res) => {
+    if (JSON.parse(AllStatus).Mirobot[1].Mirobot_status == true) {
+        res.status(418).send();
+    } else {
+        wss.clients.forEach(function each(client) {
+            if (client.readyState === wsunity.OPEN) {
+                client.send(JSON.stringify(req.body));
+            }
+        });
+        res.status(200).send();
+    }
+})
+
+
+app.post('/Scenario2/signal_lights/interval', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario2/signal_lights/on', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario2/signal_lights/off', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario2/signal_lights/red', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario2/signal_lights/green', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+
+
+
+////////////////-------------------SC 3 ------------------------////////////////////
 
 app.post('/Scenario3/ozobot/followline', (req, res) => {
-    //wsc.send(JSON.stringify({
-    //    "Ozobot": "followline"
-    //}));
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
             client.send(JSON.stringify({
@@ -1427,9 +619,6 @@ app.post('/Scenario3/ozobot/followline', (req, res) => {
 })
 
 app.post('/Scenario3/ozobot/forward', (req, res) => {
-    //wsc.send(JSON.stringify({
-    //    "Ozobot": "front"
-    //}));
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
             client.send(JSON.stringify({
@@ -1441,9 +630,6 @@ app.post('/Scenario3/ozobot/forward', (req, res) => {
 })
 
 app.post('/Scenario3/ozobot/back', (req, res) => {
-    //wsc.send(JSON.stringify({
-    //    "Ozobot": "back"
-    //}));
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
             client.send(JSON.stringify({
@@ -1455,9 +641,6 @@ app.post('/Scenario3/ozobot/back', (req, res) => {
 })
 
 app.post('/Scenario3/ozobot/left', (req, res) => {
-    //wsc.send(JSON.stringify({
-    //    "Ozobot": "left"
-    //}));
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
             client.send(JSON.stringify({
@@ -1469,9 +652,6 @@ app.post('/Scenario3/ozobot/left', (req, res) => {
 })
 
 app.post('/Scenario3/ozobot/right', (req, res) => {
-    //wsc.send(JSON.stringify({
-    //    "Ozobot": "right"
-    //}));
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
             client.send(JSON.stringify({
@@ -1483,9 +663,6 @@ app.post('/Scenario3/ozobot/right', (req, res) => {
 })
 
 app.post('/Scenario3/ozobot/stop', (req, res) => {
-    //wsc.send(JSON.stringify({
-    //    "Ozobot": "stop"
-    //}));
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
             client.send(JSON.stringify({
@@ -1499,33 +676,24 @@ app.post('/Scenario3/ozobot/stop', (req, res) => {
 
 
 app.post('/Scenario3/mirobot1/Pick_Box', (req, res) => {
-
-    if (isSc3robot1Runing == true) {
+    if (JSON.parse(AllStatus).Mirobot[2].Mirobot_status == true) {
         res.status(418).send();
     } else {
-
-        //wsc.send(JSON.stringify({
-        //    "Action": "auto",
-        //    "Object": "green"
-        //}));
-        //wsc.send(JSON.stringify(req.body));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify(req.body));
             }
         });
         res.status(200).send();
-    //    console.log(req.body);
     }
 })
 
 
 app.post('/Scenario3/mirobot2/Pick_Box', (req, res) => {
 
-    if (isSc3robot2Runing == true) {
+    if (JSON.parse(AllStatus).Mirobot[3].Mirobot_status == true) {
         res.status(418).send();
     } else {
-        //wsc.send(JSON.stringify(req.body));
         wss.clients.forEach(function each(client) {
             if (client.readyState === wsunity.OPEN) {
                 client.send(JSON.stringify(req.body));
@@ -1539,22 +707,7 @@ app.post('/Scenario3/mirobot2/Pick_Box', (req, res) => {
 
 app.post('/Scenario3/mirobot3/Pick_Box', (req, res) => {
 
-    if (isSc3robot3Runing == true) {
-        res.status(418).send();
-    } else {
-        //wsc.send(JSON.stringify(req.body));
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === wsunity.OPEN) {
-                client.send(JSON.stringify(req.body));
-            }
-        });
-        res.status(200).send();
-    }
-})
-
-app.post('/Scenario2/mirobot/Pick_Box', (req, res) => {
-
-    if (isSc2robotRuning == true) {
+    if (JSON.parse(AllStatus).Mirobot[4].Mirobot_status == true) {
         res.status(418).send();
     } else {
         wss.clients.forEach(function each(client) {
@@ -1565,3 +718,288 @@ app.post('/Scenario2/mirobot/Pick_Box', (req, res) => {
         res.status(200).send();
     }
 })
+
+app.post('/Scenario3/signal_lights_1/interval', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_1/on', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_1/off', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_1/red', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_1/green', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+
+
+app.post('/Scenario3/signal_lights_2/interval', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_2/on', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_2/off', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_2/red', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_2/green', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+
+app.post('/Scenario3/signal_lights_3/interval', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_3/on', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_3/off', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_3/red', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+app.post('/Scenario3/signal_lights_3/green', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            client.send(JSON.stringify(req.body));
+        }
+    });
+    res.status(200).send();
+})
+
+
+
+
+
+app.get('/get_All_status', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus));
+})
+
+
+app.get('/Scenario1/signal_lights/yellow', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[0].yellow.toString());
+})
+
+
+app.get('/Scenario1/signal_lights/red', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[0].red.toString());
+})
+
+app.get('/Scenario1/signal_lights/green', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[0].green.toString());
+})
+
+app.get('/Scenario1/signal_lights/status', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[0].Signallight_status.toString());
+})
+
+
+
+app.get('/Scenario2/signal_lights/yellow', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[1].yellow.toString());
+})
+
+
+app.get('/Scenario2/signal_lights/red', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[1].red.toString());
+})
+
+app.get('/Scenario2/signal_lights/green', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[1].green.toString());
+})
+
+app.get('/Scenario2/signal_lights/status', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[1].Signallight_status.toString());
+})
+
+
+app.get('/Scenario3/signal_lights_1/yellow', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[3].yellow.toString());
+})
+
+
+app.get('/Scenario3/signal_lights_1/red', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[3].red.toString());
+})
+
+app.get('/Scenario3/signal_lights_1/green', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[3].green.toString());
+})
+
+app.get('/Scenario3/signal_lights_1/status', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[3].Signallight_status.toString());
+})
+
+
+
+
+app.get('/Scenario3/signal_lights_2/yellow', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[4].yellow.toString());
+})
+
+
+app.get('/Scenario3/signal_lights_2/red', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[4].red.toString());
+})
+
+app.get('/Scenario3/signal_lights_2/green', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[4].green.toString());
+})
+
+app.get('/Scenario3/signal_lights_2/status', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[4].Signallight_status.toString());
+})
+
+
+
+app.get('/Scenario3/signal_lights_3/yellow', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[4].yellow.toString());
+})
+
+
+app.get('/Scenario3/signal_lights_3/red', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[4].red.toString());
+})
+
+app.get('/Scenario3/signal_lights_3/green', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[4].green.toString());
+})
+
+app.get('/Scenario3/signal_lights_3/status', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Signallight[4].Signallight_status.toString());
+})
+
+
+
+app.get('/Scenario3/ozobot_1/LED0', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[0].LED0.toString());
+})
+
+app.get('/Scenario3/ozobot_1/LED1', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[0].LED1.toString());
+})
+
+app.get('/Scenario3/ozobot_1/LED2', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[0].LED2.toString());
+})
+
+app.get('/Scenario3/ozobot_1/LED3', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[0].LED3.toString());
+})
+
+app.get('/Scenario3/ozobot_1/LED4', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[0].LED4.toString());
+})
+
+
+
+app.get('/Scenario1/mirobot/status', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Mirobot[0].Mirobot_status.toString());
+})
+
+app.get('/Scenario2/mirobot/status', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Mirobot[1].Mirobot_status.toString());
+})
+
+app.get('/Scenario3/mirobot1/LED2', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Mirobot[2].Mirobot_status.toString());
+})
+
+app.get('/Scenario3/mirobot2/LED3', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Mirobot[3].Mirobot_status.toString());
+})
+
+app.get('/Scenario3/mirobot3/LED4', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Mirobot[4].Mirobot_status.toString());
+})
+

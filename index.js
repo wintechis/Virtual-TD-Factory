@@ -20,7 +20,7 @@ const bodyPraser = require("body-parser");
 app.use(cors());
 app.use(bodyPraser.json());
 app.use(bodyPraser.urlencoded({ extended: true }));
-app.use(express.static('Webgl'));
+app.use(express.static('Webgl960600'));
 
 var AllStatus;
 
@@ -63,12 +63,6 @@ wss.on('listening', () => {
 
 ///////////--------------TD Implementation ---------------/////////////
 
-app.post('/Actions/test', (req, res) => {
-
-    console.log(req.body);
-    wsc.send(JSON.stringify(req.body));
-    res.status(200).send();
-})
 
 
 /////////////-------------------SC1-----------------------///////////////

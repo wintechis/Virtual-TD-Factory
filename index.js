@@ -2,18 +2,14 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 const http = require('http');
-const https = require('https');
-const fs = require('fs');
-
-const key = fs.readFileSync('./cert/key.pem');
-const cert = fs.readFileSync('./cert/cert.pem');
-
+/*const https = require('https');*/
+/*const fs = require('fs');*/
+//const key = fs.readFileSync('./cert/key.pem');
+//const cert = fs.readFileSync('./cert/cert.pem');
 const server = http.Server(app);
 //const server = https.createServer({ key: key, cert: cert }, app);
 //const { Server } = require("socket.io");
-const io = require("socket.io")(server);
 const wsunity = require("ws");
-const wsclient = require("ws");
 const bodyPraser = require("body-parser");
 //const { stat } = require('fs');
 
@@ -22,18 +18,14 @@ app.use(bodyPraser.json());
 app.use(bodyPraser.urlencoded({ extended: true }));
 app.use(express.static('Webgl1280720'));
 
+/// status of all the things in Webgl will be updated as a string line ALLStatus every 0.3 sec////
 var AllStatus;
-var socketID = 13984982347;
 
 
-/////// ------- serving html/webgl -------/////
 server.listen(3000, function () {
     console.log('listening on *:3000');
 });
 
-
-
-//////-------Websocket Server for communicating Setup------------//// 
 
 const wss = new wsunity.Server({ port: 8080 }, () => {
     console.log('websocket server online');
@@ -44,8 +36,8 @@ wss.on('close', function close() {
 
 wss.on('connection', function connection(ws) {
     ws.on('message', function status_update(data) {
-        //console.log("recevied data: " + data)
         AllStatus = data
+        /// Some Example ///////
         //console.log('Mirobot id:' + JSON.parse(AllStatus).Mirobot[0].id);
         //console.log('ozobo led:' + JSON.parse(AllStatus).Ozobot[0].LED0);
         //console.log('ozobo led:' + JSON.parse(AllStatus).Ozobot[0].LED0[0]);
@@ -61,10 +53,6 @@ wss.on('listening', () => {
 
 
 
-///////////--------------TD Implementation ---------------/////////////
-
-
-//////// ONE - FOR - ALL /////
 app.post('/one-for-all', (req, res) => {
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
@@ -75,12 +63,6 @@ app.post('/one-for-all', (req, res) => {
 })
 
 
-
-
-
-
-
-/////////////-------------------SC1-----------------------///////////////
 app.post('/1/mirobot/pick_green', (req, res) => {
     if (JSON.parse(AllStatus).Mirobot[0].Mirobot_status == true) {
         res.status(418).send("Mirobot is moving");
@@ -145,7 +127,6 @@ app.post('/1/mirobot/go_to_axis', (req, res) => {
         res.status(200).send();
     }
 })
-
 
 
 app.post('/1/signal_lights/interval', (req, res) => {
@@ -250,7 +231,7 @@ app.post('/1/ozobot/led4', (req, res) => {
     });
     res.status(200).send();
 })
-//////////////////2///////////
+
 app.post('/2/mirobot/pick_green', (req, res) => {
     if (JSON.parse(AllStatus).Mirobot[1].Mirobot_status == true) {
         res.status(418).send("Mirobot is moving");
@@ -315,7 +296,6 @@ app.post('/2/mirobot/go_to_axis', (req, res) => {
         res.status(200).send();
     }
 })
-
 
 
 app.post('/2/signal_lights/interval', (req, res) => {
@@ -419,7 +399,7 @@ app.post('/2/ozobot/led4', (req, res) => {
     res.status(200).send();
 })
 
-//////3////
+
 app.post('/3/mirobot/pick_green', (req, res) => {
     if (JSON.parse(AllStatus).Mirobot[2].Mirobot_status == true) {
         res.status(418).send("Mirobot is moving");
@@ -587,7 +567,6 @@ app.post('/3/ozobot/led4', (req, res) => {
 })
 
 
-//////4////
 app.post('/4/mirobot/pick_green', (req, res) => {
     if (JSON.parse(AllStatus).Mirobot[3].Mirobot_status == true) {
         res.status(418).send("Mirobot is moving");
@@ -757,14 +736,10 @@ app.post('/4/ozobot/led4', (req, res) => {
 
 
 
-
-
-
-
+/// parse string line AllStatus to get the status////
 app.get('/get_All_status', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus));
 })
-
 
 app.get('/1/signal_lights/yellow', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Signallight[0].yellow.toString());
@@ -782,7 +757,6 @@ app.get('/1/signal_lights/green', (req, res) => {
 app.get('/1/signal_lights/status', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Signallight[0].Signallight_status.toString());
 })
-
 
 
 app.get('/1/signal_lights/yellow', (req, res) => {
@@ -820,9 +794,6 @@ app.get('/3/signal_lights/status', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Signallight[3].Signallight_status.toString());
 })
 
-
-
-
 app.get('/3/signal_lights/yellow', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Signallight[4].yellow.toString());
 })
@@ -841,7 +812,6 @@ app.get('/3/signal_lights/status', (req, res) => {
 })
 
 
-
 app.get('/3/signal_lights/yellow', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Signallight[4].yellow.toString());
 })
@@ -858,8 +828,6 @@ app.get('/3/signal_lights/green', (req, res) => {
 app.get('/3/signal_lights/status', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Signallight[4].Signallight_status.toString());
 })
-
-
 
 app.get('/1/ozobot/LED0', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Ozobot[0].LED0.toString());
@@ -881,8 +849,6 @@ app.get('/1/ozobot/LED4', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Ozobot[0].LED4.toString());
 })
 
-
-
 app.get('/1/mirobot/status', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Mirobot[0].Mirobot_status.toString());
 })
@@ -898,8 +864,6 @@ app.get('/3/mirobot/status', (req, res) => {
 app.get('/4/mirobot/status', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Mirobot[3].Mirobot_status.toString());
 })
-
-
 
 app.get('/3/mirobot/LED2', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Mirobot[2].Mirobot_status.toString());

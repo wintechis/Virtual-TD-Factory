@@ -27,7 +27,7 @@ server.listen(3000, function () {
 });
 
 
-const wss = new wsunity.Server({ port: 8080 }, () => {
+const wss = new wsunity.Server({ port: 3008 }, () => {
     console.log('websocket server online');
 });
 
@@ -42,7 +42,6 @@ wss.on('connection', function connection(ws) {
         //console.log('ozobo led:' + JSON.parse(AllStatus).Ozobot[0].LED0);
         //console.log('ozobo led:' + JSON.parse(AllStatus).Ozobot[0].LED0[0]);
         //console.log('ozobo led:' + JSON.parse(AllStatus).Signallight[0].yellow);
-
     });
 });
 
@@ -127,7 +126,6 @@ app.post('/1/mirobot/go_to_axis', (req, res) => {
         res.status(200).send();
     }
 })
-
 
 app.post('/1/signal_lights/interval', (req, res) => {
     wss.clients.forEach(function each(client) {
@@ -853,27 +851,55 @@ app.get('/1/mirobot/status', (req, res) => {
     res.status(200).send(JSON.parse(AllStatus).Mirobot[0].Mirobot_status.toString());
 })
 
-app.get('/2/mirobot/status', (req, res) => {
-    res.status(200).send(JSON.parse(AllStatus).Mirobot[1].Mirobot_status.toString());
+app.get('/2/ozobot/LED0', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[1].LED0.toString());
 })
 
-app.get('/3/mirobot/status', (req, res) => {
-    res.status(200).send(JSON.parse(AllStatus).Mirobot[2].Mirobot_status.toString());
+app.get('/2/ozobot/LED1', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[1].LED1.toString());
 })
 
-app.get('/4/mirobot/status', (req, res) => {
-    res.status(200).send(JSON.parse(AllStatus).Mirobot[3].Mirobot_status.toString());
+app.get('/2/ozobot/LED2', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[1].LED2.toString());
 })
 
-app.get('/3/mirobot/LED2', (req, res) => {
-    res.status(200).send(JSON.parse(AllStatus).Mirobot[2].Mirobot_status.toString());
+app.get('/2/ozobot/LED3', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[1].LED3.toString());
 })
 
-app.get('/3/mirobot2/LED3', (req, res) => {
-    res.status(200).send(JSON.parse(AllStatus).Mirobot[3].Mirobot_status.toString());
+app.get('/2/ozobot/LED4', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Ozobot[1].LED4.toString());
 })
 
-app.get('/3/mirobot3/LED4', (req, res) => {
-    res.status(200).send(JSON.parse(AllStatus).Mirobot[4].Mirobot_status.toString());
+
+app.get('/1/barrier/collided', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Barrier[0].collided.toString());
 })
 
+app.get('/1/barrier/distance', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Barrier[0].distance.toString());
+})
+
+app.get('/1/barrier/entertime', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Barrier[0].entertime.toString());
+})
+
+app.get('/1/barrier/exittime', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Barrier[0].exittime.toString());
+})
+
+app.get('/2/barrier/collided', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Barrier[1].collided.toString());
+})
+
+app.get('/2/barrier/distance', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Barrier[1].distance.toString());
+})
+
+app.get('/2/barrier/entertime', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Barrier[1].entertime.toString());
+})
+
+app.get('/2/barrier/exittime', (req, res) => {
+    res.status(200).send(JSON.parse(AllStatus).Barrier[1].exittime.toString());
+})

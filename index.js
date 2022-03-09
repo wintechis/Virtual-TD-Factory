@@ -16,7 +16,8 @@ const bodyPraser = require("body-parser");
 app.use(cors());
 app.use(bodyPraser.json());
 app.use(bodyPraser.urlencoded({ extended: true }));
-app.use(express.static('Webgl1280720'));
+//app.use(express.static('Webgl1280720'));
+app.use(express.static('Webgl_Paul'));
 
 /// status of all the things in Webgl will be updated as a string line ALLStatus every 0.3 sec////
 var AllStatus;
@@ -39,9 +40,9 @@ wss.on('connection', function connection(ws) {
         AllStatus = data
         /// Some Example ///////
         //console.log('Mirobot id:' + JSON.parse(AllStatus).Mirobot[0].id);
-        //console.log('ozobo led:' + JSON.parse(AllStatus).Ozobot[0].LED0);
-        //console.log('ozobo led:' + JSON.parse(AllStatus).Ozobot[0].LED0[0]);
-        //console.log('ozobo led:' + JSON.parse(AllStatus).Signallight[0].yellow);
+        //console.log('ozobo led RBG:' + JSON.parse(AllStatus).Ozobot[0].LED0);
+        //console.log('ozobo led R:' + JSON.parse(AllStatus).Ozobot[0].LED0[0]);
+        //console.log('signallight yellow:' + JSON.parse(AllStatus).Signallight[0].yellow);
     });
 });
 

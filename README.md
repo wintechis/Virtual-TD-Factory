@@ -8,15 +8,24 @@
 * Optional: Install [Postman](https://www.postman.com/downloads/) and import Examples.postman_collection.json to see some examples of how to interact with the WebGL App.
 
 # Interacting with WebGL
-## Getting properties and statuses from WebGL
-The status of all the things in Webgl is stored and updated as a JSON string line ```AllStatus``` on the server every 0.1 sec. ```ALLStatus``` can be request with a GET method at the URL http://localhost/get_All_status (visit http://localhost/get_All_status or send GET Request using Postman). 
-
-Prase ```AllStatus``` to retrieve the status of a specific thing in the WebGL, for examples:
+## Getting properties and statuses from a WebGL instance
+The status of everything in each webgl is stored in the ```Socket.AllStatus``` property of the Websocket client object. These status will be updated every 0.1 seconds on the server. The Socket.AllStatus property can be requested by sending the WebGL ID to the URL http://localhost/get_All_status.
 ```
-console.log('Mirobot id:' + JSON.parse(AllStatus).Mirobot[0].id);
-console.log('ozobo led RGB values:' + JSON.parse(AllStatus).Ozobot[0].LED0);
-console.log('ozobo enter mirobot's working area:' + JSON.parse(AllStatus).Barrier[0].collided);
-console.log('Signallight yellow intensity:' + JSON.parse(AllStatus).Signallight[0].yellow);
+{
+    "Websocket": [                 
+        {
+            "Socket_id": "73ykxpsc8l19xnhww"
+        }
+    ]
+}
+```
+
+Prase ```Socket.AllStatus``` to retrieve the status of a specific thing in the WebGL, for examples:
+```
+console.log('Mirobot id:' + JSON.parse(Socket.AllStatus).Mirobot[0].id);
+console.log('ozobo led RGB values:' + JSON.parse(Socket.AllStatus).Ozobot[0].LED0);
+console.log('ozobo enter mirobot's working area:' + JSON.parse(Socket.AllStatus).Barrier[0].collided);
+console.log('Signallight yellow intensity:' + JSON.parse(Socket.AllStatus).Signallight[0].yellow);
 ```
 Output:
 ```
@@ -85,6 +94,53 @@ Send followed JSON objects with POST methods will invoke the actions of things i
                 23
             ],
             "Speed": 12 // Movement speed of Ozobot.
+        }
+    ]
+}
+```
+
+
+## WebGL instances management / synchronization
+The following example shows how to interact with the specified WebGL instance by adding the websocket key and the socket ID property
+```
+{
+    "Websocket": [                 
+        {
+            "Socket_id": "73ykxp4nsl19xzbae"
+        }
+    ],
+    "Mirobot": [                 
+        {
+            "id": 1,
+            "PickBox": "green",
+        }
+    ]
+}
+```
+The socket ID appears at the bottom left of the WebGL when the websocket client and server are successfully connected. Copying the ID from WebGL is currently not available. Sending a request or simply open the URL localhost:3000/socketscheck will get the socket information.
+
+The webgl instances can be synchronized with each other by sending the following JSON object to the URL localhost:3000/sychronizing
+```
+{    
+    "Websocket": [
+        {
+            "Socket_id": "73ykxp4nsl19xzbae",
+            "synHost_id": "73ykxp4nsl19xzhqj",
+            "IsSynchronizing": true
+        }
+    ]
+}
+```
+Once a WebGL instance is synchronized, sending a message to a WebGL instance in the cluster will also send a message to all synchronized WebGL clients. Each WebGL instance can connect to one host or multiple clients. In case of changing the host or disconnecting the host and connecting to another client cluster, the WebGL instance must be "un-synchronized" first.
+
+De-synchronizing(unfinished, temporary)
+```
+{    
+    "Websocket": [
+        {
+            "Socket_id": "73ykxp4nsl19xzbae",
+            "synHost_id": "73ykxp4nsl19xzhqj",
+            "IsSynchronizing": false
         }
     ]
 }

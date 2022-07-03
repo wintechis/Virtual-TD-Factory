@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "4ce7b1c3-9d9e-4c95-a374-ecc455ca365e",
 		"name": "Examples",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4047704"
 	},
 	"item": [
 		{
@@ -62,7 +63,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp4nsl19xzbae\"\r\n        }\r\n    ],\r\n    \"Mirobot\": [                 \r\n        {\r\n            \"id\": 1,\r\n            \"Joint1_status\": 80, \r\n            \"Joint2_status\": 50,\r\n            \"Joint3_status\": -50,\r\n            \"Joint4_status\": 50,\r\n            \"Joint5_status\": -50,\r\n            \"Joint6_status\": 50,\r\n            \"Mirobot_IsSynchronizing\": false\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"Joint1_status\": 90, \r\n            \"Joint2_status\": 23,\r\n            \"Joint3_status\": -50,\r\n            \"Joint4_status\": -25,\r\n            \"Joint5_status\": 40,\r\n            \"Joint6_status\": 150,\r\n            \"PickBox\": \"green\", \r\n            \"Mirobot_IsSynchronizing\": false\r\n        }\r\n    ],\r\n    \"Signallight\": [\r\n        {\r\n            \"id\": 2,\r\n            \"Signallight_status\": true,\r\n            \"red\": 0,\r\n            \"green\": 255,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.20000000298023224,\r\n            \"blink\": true\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"Signallight_status\": true,\r\n            \"red\": 255,\r\n            \"green\": 0,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.20000000298023224,\r\n            \"blink\": true\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"Signallight_status\": true,\r\n            \"red\": 0,\r\n            \"green\": 100,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.10000000298023224,\r\n            \"blink\": false\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"Signallight_status\": true,\r\n            \"red\": 0,\r\n            \"green\": 100,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.10000000298023224,\r\n            \"blink\": true\r\n        }\r\n    ],\r\n    \"Ozobot\": [\r\n        {\r\n            \"id\": 1,\r\n            \"LED0\": [\r\n                12,\r\n                123,\r\n                255\r\n            ],\r\n            \"LED1\": [\r\n                123,\r\n                255,\r\n                23\r\n            ],\r\n            \"LED2\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED3\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED4\": [\r\n                255,\r\n                123,\r\n                23\r\n            ],\r\n            \"Speed\": 12\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"LED0\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED1\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED2\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED3\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED4\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"Speed\": 0\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"LED0\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED1\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED2\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED3\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"LED4\": [\r\n                255,\r\n                255,\r\n                255\r\n            ],\r\n            \"Speed\": 5\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxpwggl55gfnvp\"\r\n        }\r\n    ],\r\n    \"Mirobot\": [                 \r\n        {\r\n            \"id\": 7,\r\n            \"PickBox\": \"green\"\r\n        },\r\n        {\r\n            \"id\": 16,\r\n            \"PickBox\": \"green\"\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"PickBox\": \"green\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"PickBox\": \"red\"\r\n        }\r\n    ],\r\n    \"Signallight\": [\r\n        {\r\n            \"id\": 9,\r\n            \"Signallight_status\": true,\r\n            \"red\": 0,\r\n            \"green\": 255,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.20000000298023224,\r\n            \"blink\": true\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"Signallight_status\": true,\r\n            \"red\": 255,\r\n            \"green\": 0,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.20000000298023224,\r\n            \"blink\": false\r\n        },\r\n        {\r\n            \"id\": 14,\r\n            \"Signallight_status\": false,\r\n            \"red\": 0,\r\n            \"green\": 100,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.10000000298023224,\r\n            \"blink\": false\r\n        }\r\n    ],\r\n    \"Ozobot\": [\r\n        {\r\n            \"id\": 1,\r\n            \"MovementSpeed\": \"0\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"MovementSpeed\": \"3\",\r\n            \"AngularSpeed\": \"20\",\r\n            \"rotateDegree\": \"\",\r\n            \"currentDegree\": \"271,0211\",\r\n            \"SelectLeftPath\": false,\r\n            \"SelectRightPath\": false,\r\n            \"SelectBackPath\": false,\r\n            \"SelectFrontPath\": false,\r\n            \"moveforward\": false,\r\n            \"rightRotate\": false,\r\n            \"leftRotate\": false,\r\n            \"isOnPath\": false,\r\n            \"isfollowingLine\": false\r\n        },\r\n        {\r\n            \"id\": 15,\r\n            \"MovementSpeed\": \"24\"\r\n        }\r\n    ],\r\n    \"Camera\": {\r\n        \"ozobotid\": 3\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -90,7 +91,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{    \r\n    \"Websocket\": [\r\n        {\r\n            \"Socket_id\": \"73ykxp4nsl19xzbae\",\r\n            \"synHost_id\": \"73ykxp4nsl19xzhqj\",\r\n            \"IsSynchronizing\": true\r\n        }\r\n    ]\r\n}",
+					"raw": "{    \r\n    \"Websocket\": [\r\n        {\r\n            \"Socket_id\": \"au6tbw6l1a153az\",\r\n            \"synHost_id\": \"au6tbw6l1a14yr5\",\r\n            \"IsSynchronizing\": true\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -98,10 +99,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/sychronizing",
+					"raw": "http://131.188.76.66:3000/sychronizing",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"131",
+						"188",
+						"76",
+						"66"
 					],
 					"port": "3000",
 					"path": [
@@ -112,13 +116,16 @@
 			"response": []
 		},
 		{
-			"name": "/1/mirobot/pick_green",
+			"name": "GetOzobot",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{    \r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp4nsl19xzbae\"\r\n        }\r\n    ],\r\n    \"Mirobot\": [   \r\n        {\r\n            \"id\": 1,\r\n            \"PickBox\": \"green\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp10rkl55owilu\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -126,29 +133,65 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/1/mirobot/pick_green",
+					"raw": "http://localhost:3000/get/ozobot/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"1",
+						"get",
+						"ozobot",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMirobot",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp10rkl55ihhng\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/get/mirobot/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"get",
 						"mirobot",
-						"pick_green"
+						"4"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "/1/mirobot/pick_yellow",
+			"name": "GetSignalLight",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp4nsl19xzbae\"\r\n        }\r\n    ],\r\n    \"Mirobot\": [   \r\n        {\r\n            \"id\": 1,\r\n            \"PickBox\": \"yellow\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp10rkl55ihhng\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -156,473 +199,23 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/1/mirobot/pick_yellow",
+					"raw": "http://localhost:3000/get/signal_lights/6",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"1",
-						"mirobot",
-						"pick_yellow"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/mirobot/pick_red",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp4nsl19xzbae\"\r\n        }\r\n    ],\r\n    \"Mirobot\": [   \r\n        {\r\n            \"id\": 1,\r\n            \"PickBox\": \"red\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/mirobot/pick_red",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"mirobot",
-						"pick_red"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/mirobot/pick_blue",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp4nsl19xzbae\"\r\n        }\r\n    ],\r\n    \"Mirobot\": [   \r\n        {\r\n            \"id\": 1,\r\n            \"PickBox\": \"blue\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/mirobot/pick_blue",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"mirobot",
-						"pick_blue"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/mirobot/go_to_axis",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Mirobot\": [   \r\n        {\r\n            \"id\": 1,\r\n            \"Joint1_status\": 24,\r\n            \"Joint2_status\": 24,\r\n            \"Joint3_status\": 24,\r\n            \"Joint4_status\": 0,\r\n            \"Joint5_status\": 140,\r\n            \"Joint6_status\": 23\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/mirobot/go_to_axis",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"mirobot",
-						"go_to_axis"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/speed",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Ozobot\": [\r\n        {\r\n            \"id\": 1,\r\n            \"Speed\": 0\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/speed",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"speed"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led0",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Ozobot\": [\r\n        {\r\n            \"id\": 1,\r\n            \"LED0\": [\r\n                123,\r\n                23,\r\n                1\r\n            ]\r\n        }\r\n    ]\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led0",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led1",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Ozobot\": [\r\n        {\r\n            \"id\": 1,\r\n            \"LED1\": [\r\n                255,\r\n                255,\r\n                255\r\n            ]\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led2",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Ozobot\": [\r\n        {\r\n            \"id\": 1,\r\n            \"LED2\": [\r\n                255,\r\n                255,\r\n                255\r\n            ]\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led3",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Ozobot\": [\r\n        {\r\n            \"id\": 1,\r\n            \"LED3\": [\r\n                255,\r\n                255,\r\n                255\r\n            ]\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led4",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Ozobot\": [\r\n        {\r\n            \"id\": 1,\r\n            \"LED4\": [\r\n                255,\r\n                255,\r\n                255\r\n            ]\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led4",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/signal_lights/interval",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Signallight\": [\r\n        {\r\n            \"id\": 1,\r\n            \"interval\": 0.20000000298023224\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/interval",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
+						"get",
 						"signal_lights",
-						"interval"
+						"6"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "/1/signal_lights/on",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Signallight\": [\r\n        {\r\n            \"id\": 1,\r\n            \"Signallight_status\": true\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/on",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"signal_lights",
-						"on"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/signal_lights/off",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Signallight\": [\r\n        {\r\n            \"id\": 1,\r\n            \"Signallight_status\": false\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/off",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"signal_lights",
-						"off"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/signal_lights/green",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Signallight\": [\r\n        {\r\n            \"id\": 1,\r\n            \"green\": 255\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/green",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"signal_lights",
-						"green"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/signal_lights/red",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Signallight\": [\r\n        {\r\n            \"id\": 1,\r\n            \"red\": 0\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/red",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"signal_lights",
-						"red"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/signal_lights/yellow",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ],\r\n    \"Signallight\": [\r\n        {\r\n            \"id\": 1,\r\n            \"yellow\": 0\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/yellow",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"signal_lights",
-						"yellow"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/mirobot/status",
+			"name": "GetBarrier",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -631,35 +224,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/mirobot/status",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"mirobot",
-						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/signal_lights/green",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp10rkl55ihhng\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -667,320 +232,23 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/green",
+					"raw": "http://localhost:3000/get/barrier/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"1",
-						"signal_lights",
-						"green"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/signal_lights/yellow",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/yellow",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"signal_lights",
-						"yellow"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/signal_lights/red",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/red",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"signal_lights",
-						"red"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/signal_lights/status",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/signal_lights/status",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"signal_lights",
-						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led0",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led0",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led2",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led3",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/ozobot/led4",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/ozobot/led4",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
-						"ozobot",
-						"led4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/1/barrier/collided",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/1/barrier/collided",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"1",
+						"get",
 						"barrier",
-						"collided"
+						"4"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "/1/barrier/distance",
+			"name": "GetCamera",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -989,7 +257,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp10rkl55ihhng\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -997,32 +265,28 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/1/barrier/distance",
+					"raw": "http://localhost:3000/get/camera",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"1",
-						"barrier",
-						"distance"
+						"get",
+						"camera"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "/1/barrier/entertime",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "move_Ozobot_example",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp12mol55sda7x\"\r\n        }\r\n    ],\r\n    \"Ozobot\": [\r\n        {\r\n            \"id\": 3,\r\n            \"moveforward\": true        \r\n        }\r\n    ],\r\n    \"Camera\": {\r\n        \"ozobotid\": 3\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1030,32 +294,27 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/1/barrier/entertime",
+					"raw": "http://localhost:3000/one-for-all",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"1",
-						"barrier",
-						"entertime"
+						"one-for-all"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "/1/barrier/exittime",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "move_Mirobot_example",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxppbol18knewh\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp12mol55sda7x\"\r\n        }\r\n    ],\r\n    \"Mirobot\": [                 \r\n        {\r\n            \"id\": 7,\r\n            \"PickBox\": \"green\"\r\n        },\r\n        {\r\n            \"id\": 16,\r\n            \"PickBox\": \"green\"\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"PickBox\": \"green\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"PickBox\": \"red\"\r\n        }\r\n    ],\r\n    \"Camera\": {\r\n        \"ozobotid\": -1\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1063,16 +322,42 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/1/barrier/exittime",
+					"raw": "http://localhost:3000/one-for-all",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"1",
-						"barrier",
-						"exittime"
+						"one-for-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "controll_Signallight_example",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Websocket\": [                 \r\n        {\r\n            \"Socket_id\": \"73ykxp12mol55sda7x\"\r\n        }\r\n    ],\r\n    \"Signallight\": [\r\n        {\r\n            \"id\": 9,\r\n            \"Signallight_status\": true,\r\n            \"red\": 0,\r\n            \"green\": 255,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.20000000298023224,\r\n            \"blink\": true\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"Signallight_status\": true,\r\n            \"red\": 255,\r\n            \"green\": 0,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.20000000298023224,\r\n            \"blink\": false\r\n        },\r\n        {\r\n            \"id\": 14,\r\n            \"Signallight_status\": false,\r\n            \"red\": 0,\r\n            \"green\": 100,\r\n            \"yellow\": 0,\r\n            \"interval\": 0.10000000298023224,\r\n            \"blink\": false\r\n        }\r\n    ],\r\n    \"Camera\": {\r\n        \"ozobotid\": -1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/one-for-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"one-for-all"
 					]
 				}
 			},

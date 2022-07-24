@@ -1,7 +1,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# New introduction and user guide: https://siminghuang2014.gitbook.io/virtual-td-factory/ #
+# New introduction and user guide: https://app.gitbook.com/s/eQLsiABtendPYR0pBfYT/ (in progress) #
 
 # Installation
 

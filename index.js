@@ -158,18 +158,245 @@ app.post('/one-for-all', (req, res) => {
     res.status(200).send();
 })
 
-///--- Example: respond 418 while mirobot is moving ---///
-app.post('/2/mirobot/go_to_axis', (req, res) => {
-    if (JSON.parse(AllStatus).Mirobot[1].Mirobot_status == true) {
-        res.status(418).send("Mirobot is moving");
-    } else {
-        SocketManager(req.body);
-        res.status(200).send();
+
+
+app.post('/mirobot/JSON', (req, res) => {
+    var Movingrobots = [];
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            if (client.id == req.body.Websocket[0].Socket_id) {
+                req.body.Mirobot.forEach(function each(mirobot) {
+                    if (JSON.parse(client.AllStatus).Mirobot[mirobot.id - 1].Mirobot_status == true) {
+                        Movingrobots.push(mirobot.id);
+                    }
+                })
+                if (Movingrobots.length != 0) {
+                    res.status(418).send("Mirobot " + Movingrobots.join() + " is moving");
+                } else {
+                    SocketManager(req.body);
+                    res.status(200).send();
+                }
+
+            }
+        }
+    });
+})
+
+
+app.post('/:socketID/mirobot/:mirobotID/go_to_axis', (req, res) => {
+wss.clients.forEach(function each(client) {
+    if (client.readyState === wsunity.OPEN) {
+        if (client.id == req.params.socketID) {
+            if (JSON.parse(client.AllStatus).Mirobot[req.params.mirobotID - 1].Mirobot_status == true) {
+                res.status(418).send("Mirobot " + req.params.mirobotID + " is moving");
+            } else {
+                var action = {
+                    Mirobot: [
+                        {
+                            "id": req.params.mirobotID,
+                            "Joint1_status": req.query.j1,
+                            "Joint2_status": req.query.j2,
+                            "Joint3_status": req.query.j3,
+                            "Joint4_status": req.query.j4,
+                            "Joint5_status": req.query.j5,
+                            "Joint6_status": req.query.j6
+                        }
+                    ],
+                    Camera: {
+                        "ozobotid": -1
+                    }
+                }
+                SocketManager(action);
+                res.status(200).send();
+            }
+        }
     }
+});
+})
+
+app.post('/:socketID/mirobot/:mirobotID/pick_box', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            if (client.id == req.params.socketID) {
+                if (JSON.parse(client.AllStatus).Mirobot[req.params.mirobotID - 1].Mirobot_status == true) {
+                    res.status(418).send("Mirobot is moving");
+                } else {
+                    var action = {
+                        Mirobot: [
+                            {
+                                "id": req.params.mirobotID,
+                                "PickBox": req.query.box
+                            }
+                        ],
+                        Camera: {
+                            "ozobotid": -1
+                        }
+                    }
+                    SocketManager(action);
+                    res.status(200).send();
+                }
+            }
+        }
+    });
+})
+
+
+app.post('/ozobot/follow_line', (req, res) => {
+    var LineFollowingOzobots = [];
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            if (client.id == req.body.Websocket[0].Socket_id) {
+                req.body.Ozobot.forEach(function each(ozobot) {
+                    if (JSON.parse(client.AllStatus).Ozobot[ozobot.id - 1].isPathChosen == false && JSON.parse(client.AllStatus).Ozobot[ozobot.id - 1].isOnPath == false) {
+                        LineFollowingOzobots.push(ozobot.id);
+                    }
+                })
+                if (LineFollowingOzobots.length != 0) {
+                    res.status(418).send("Ozobot " + LineFollowingOzobots.join() + " is not on the path. Select a path using {FindClosestPath} or {SelectPath} and wait until ozobot reaches the spot");
+                } else {
+                    SocketManager(req.body);
+                    res.status(200).send();
+                }
+
+            }
+        }
+    });
+})
+
+app.post('/ozobot/select_path', (req, res) => {
+    var LineFollowingOzobots = [];
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            if (client.id == req.body.Websocket[0].Socket_id) {
+                req.body.Ozobot.forEach(function each(ozobot) {
+                    if (JSON.parse(client.AllStatus).Ozobot[ozobot.id - 1].detect_intersection.left == false && ozobot.SelectPath == "left") {
+                        LineFollowingOzobots.push(ozobot.id + "left");
+                    } else if (JSON.parse(client.AllStatus).Ozobot[ozobot.id - 1].detect_intersection.right == false && ozobot.SelectPath == "right") { LineFollowingOzobots.push(ozobot.id + "right"); }
+                    else if (JSON.parse(client.AllStatus).Ozobot[ozobot.id - 1].detect_intersection.back == false && ozobot.SelectPath == "back") { LineFollowingOzobots.push(ozobot.id + "back"); }
+                    else if (JSON.parse(client.AllStatus).Ozobot[ozobot.id - 1].detect_intersection.front == false && ozobot.SelectPath == "front") { LineFollowingOzobots.push(ozobot.id + "front"); }
+                })
+                if (LineFollowingOzobots.length != 0) {
+                    res.status(418).send("Ozobot " + LineFollowingOzobots.join() + " doesn't have the path option detected by detector");
+                } else {
+                    SocketManager(req.body);
+                    res.status(200).send();
+                }
+
+            }
+        }
+    });
+})
+
+app.post('/ozobot/find_closest_path', (req, res) => {
+    var LineFollowingOzobots = [];
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            if (client.id == req.body.Websocket[0].Socket_id) {
+                req.body.Ozobot.forEach(function each(ozobot) {
+                    if (ozobot.FindClosestPath == true && ozobot.RotateTowards != null) {
+                        LineFollowingOzobots.push(ozobot.id);
+                    } else if (ozobot.FindClosestPath == true && ozobot.MoveTowards != null) {
+                        LineFollowingOzobots.push(ozobot.id);
+                    }
+                })
+                if (LineFollowingOzobots.length != 0) {
+                    res.status(418).send("Ozobot " + LineFollowingOzobots.join() + " can not execute {FindClosestPath} with {RotateTowards} or {MoveTowards} at the same time");
+                } else {
+                    SocketManager(req.body);
+                    res.status(200).send();
+                }
+
+            }
+        }
+    });
+})
+
+app.post('/ozobot/move', (req, res) => {
+    var LineFollowingOzobots = [];
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            if (client.id == req.body.Websocket[0].Socket_id) {
+                req.body.Ozobot.forEach(function each(ozobot) {
+                    if (JSON.parse(client.AllStatus).Ozobot[ozobot.id - 1].isPathChosen == true) {
+                        LineFollowingOzobots.push(ozobot.id);
+                    }
+                })
+                if (LineFollowingOzobots.length != 0) {
+                    res.status(418).send("Ozobot " + LineFollowingOzobots.join() + " is on the path. Wait for it reaches the end or use stop command to stop ozobot from following the line");
+                } else {
+                    SocketManager(req.body);
+                    res.status(200).send();
+                }
+
+            }
+        }
+    });
+})
+
+app.post('/ozobot/rotate', (req, res) => {
+    var LineFollowingOzobots = [];
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            if (client.id == req.body.Websocket[0].Socket_id) {
+                req.body.Ozobot.forEach(function each(ozobot) {
+                    if (JSON.parse(client.AllStatus).Ozobot[ozobot.id - 1].isPathChosen == true) {
+                        LineFollowingOzobots.push(ozobot.id);
+                    }
+                })
+                if (LineFollowingOzobots.length != 0) {
+                    res.status(418).send("Ozobot " + LineFollowingOzobots.join() + " is on the path. Wait for it reaches the end or use stop command to stop ozobot from following the line");
+                } else {
+                    SocketManager(req.body);
+                    res.status(200).send();
+                }
+
+            }
+        }
+    });
+})
+
+app.post('/signallight', (req, res) => {
+    var off = [];
+    var missingstatus = [];
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            if (client.id == req.body.Websocket[0].Socket_id) {
+                req.body.Signallight.forEach(function each(signallight) {
+                    if (signallight.Signallight_status == false) {
+                        off.push(signallight.id);
+                    } else if (signallight.Signallight_status == null) {
+                        missingstatus.push(signallight.id);
+                    }
+                })
+                if (missingstatus.length != 0) {
+                    res.status(418).send("signallight " + missingstatus.join() + " missing the status {Signallight_status}");
+                } else {
+                    SocketManager(req.body);
+                    if (off.length != 0) {
+                        res.status(200).send("Message sent. The signallight " + off.join() + " are off, so you won't see the settings change.");
+                    } else {
+                        res.status(200).send();
+                    }
+                    
+                }
+
+            }
+        }
+    });
 })
 
 
 
+
+app.get('/:socketID/get_All_status', (req, res) => {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === wsunity.OPEN) {
+            if (client.id == req.params.socketID) {
+                res.status(200).send(JSON.parse(client.AllStatus));
+            }
+        }
+    });
+})
 
 app.get('/get_All_status', (req, res) => {
     wss.clients.forEach(function each(client) {
@@ -182,10 +409,10 @@ app.get('/get_All_status', (req, res) => {
 })
 
 
-app.get('/get/ozobot/:ozobotID', (req, res) => {
+app.get('/:socketID/ozobot/:ozobotID', (req, res) => {
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
-            if (client.id == req.body.Websocket[0].Socket_id) {
+            if (client.id == req.params.socketID) {
                 res.status(200).send(JSON.parse(client.AllStatus).Ozobot[req.params.ozobotID-1]);
             }
         }
@@ -193,52 +420,40 @@ app.get('/get/ozobot/:ozobotID', (req, res) => {
 })
 
 
-app.get('/get/mirobot/:mirobotID', (req, res) => {
+app.get('/:socketID/mirobot/:mirobotID', (req, res) => {
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
-            if (client.id == req.body.Websocket[0].Socket_id) {
+            if (client.id == req.params.socketID) {
                 res.status(200).send(JSON.parse(client.AllStatus).Mirobot[req.params.mirobotID - 1]);
             }
         }
     });
 })
 
-app.get('/get/signal_lights/:signalID', (req, res) => {
+app.get('/:socketID/signal_lights/:signalID', (req, res) => {
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
-            if (client.id == req.body.Websocket[0].Socket_id) {
+            if (client.id == req.params.socketID) {
                 res.status(200).send(JSON.parse(client.AllStatus).Signallight[req.params.signalID - 1]);
             }
         }
     });
 })
 
-app.get('/get/barrier/:barrierID', (req, res) => {
+app.get('/:socketID/barrier/:barrierID', (req, res) => {
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
-            if (client.id == req.body.Websocket[0].Socket_id) {
+            if (client.id == req.params.socketID) {
                 res.status(200).send(JSON.parse(client.AllStatus).Barrier[req.params.barrierID - 1]);
             }
         }
     });
 })
 
-
-
-app.get('/get/websocket', (req, res) => {
+app.get('/:socketID/camera', (req, res) => {
     wss.clients.forEach(function each(client) {
         if (client.readyState === wsunity.OPEN) {
-            if (client.id == req.body.Websocket[0].Socket_id) {
-                res.status(200).send(JSON.parse(client.AllStatus).Websocket);
-            }
-        }
-    });
-})
-
-app.get('/get/camera', (req, res) => {
-    wss.clients.forEach(function each(client) {
-        if (client.readyState === wsunity.OPEN) {
-            if (client.id == req.body.Websocket[0].Socket_id) {
+            if (client.id == req.params.socketID) {
                 res.status(200).send(JSON.parse(client.AllStatus).Camera);
             }
         }
